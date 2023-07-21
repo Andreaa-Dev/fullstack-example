@@ -19,6 +19,10 @@ const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
   },
+  role: {
+    type: String,
+    default: "guest",
+  },
 });
 
 export default mongoose.model<UserDocument>("User", UserSchema);

@@ -34,7 +34,7 @@ export default function ProductDetail() {
     <div>
       <h1>ProductDetail</h1>
       <p>{productDetail.title}</p>
-      <p> {productDetail.price}</p>
+      <p> {productDetail.price} $</p>
       <button onClick={() => onClickHandler(productDetail)}>Add to cart</button>
     </div>
   );

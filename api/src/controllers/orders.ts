@@ -10,7 +10,10 @@ export const createOrderController = async (
 ) => {
   try {
     const newOrder = new Order({
-      userId: req.params.userId,
+      userId: req.params.id,
+      // req.body: []
+      // req.body: {productList:cartList }
+      // productList: req.body,
       productList: req.body.productList,
     });
     const order = await orderServices.createOrder(newOrder);
@@ -28,6 +31,7 @@ export const getOrderListByUserId = async (
 ) => {
   try {
     const userId = req.params.id;
+    // find order by user id
     const orderList = await orderServices.getOrderByUserId(userId);
     res.status(200).json(orderList);
   } catch (error) {

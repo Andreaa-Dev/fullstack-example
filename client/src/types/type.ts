@@ -19,5 +19,5 @@ export type Order = {
   _id: string;
   userId: string;
   productList: ProductOrder[];
-  createdAt: Date;
+  createdAt: string;
 };

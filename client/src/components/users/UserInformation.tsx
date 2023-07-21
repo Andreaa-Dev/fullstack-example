@@ -5,6 +5,8 @@ import { RootState } from "../../redux/store";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { userActions } from "../../redux/slices/user";
+import OrderList from "../orders/OrderList";
+import { Link } from "react-router-dom";
 
 // fetch user by id
 // get id from useParams
@@ -14,6 +16,8 @@ export default function UserInformation() {
   const userDetail = useSelector(
     (state: RootState) => state.users.userInformation
   );
+
+  //fetch again
 
   const [formData, setFormData] = useState({
     firstName: userDetail?.firstName,
@@ -80,6 +84,9 @@ export default function UserInformation() {
       <br></br>
       <button onClick={onEditHandler}>Edit</button>
       <button onClick={onSubmitHandler}>Submit</button>
+      <Link to="/order">
+        <button> orders</button>
+      </Link>
     </div>
   );
 }

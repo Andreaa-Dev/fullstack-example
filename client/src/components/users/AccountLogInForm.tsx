@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { userActions } from "../../redux/slices/user";
 
 export default function AccountLogInForm() {
@@ -44,7 +45,7 @@ export default function AccountLogInForm() {
           // fetch user by id
           // navigate(`/users/${res.data.userData._id}`);
 
-          navigate(`/users`);
+          navigate(`/user`);
         }
         console.log(res.data);
       })
@@ -52,7 +53,7 @@ export default function AccountLogInForm() {
   }
   return (
     <div>
-      AccountLogInForm Form
+      <h1> Log In Form </h1>
       <TextField
         id="standard-basic"
         label="Email"

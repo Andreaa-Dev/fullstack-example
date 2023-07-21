@@ -8,9 +8,9 @@ import {
 
 const router = Router();
 
-// create user
+// create order
 router.post(
-  "/:userId",
+  "/:id",
   // passport.authenticate("jwt", { session: false }),
   createOrderController
 );

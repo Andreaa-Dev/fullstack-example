@@ -6,7 +6,10 @@ const createOrder = async (order: OrderDocument): Promise<OrderDocument> => {
 };
 
 const getOrderByUserId = async (userId: string): Promise<OrderDocument[]> => {
-  const foundOrders = await Order.find({ userId: userId });
+  const foundOrders = await Order.find({ userId: userId }).populate({
+    // populate to see the user detail
+    path: "userId",
+  });
 
   if (!foundOrders) {
     throw new NotFoundError(`order with user id ${userId} not found`);

@@ -16,11 +16,12 @@ router.post("/", createUser);
 router.post("/login", logInWithPassword);
 
 // update user information
-
 router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   updateUserController
 );
+// user has log in
+// router.get("/:id", getUserById);
 
 export default router;

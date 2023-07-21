@@ -38,7 +38,7 @@ export default function AccountRegisterForm() {
 
   return (
     <div>
-      Form
+      <h1> Register form</h1>
       <TextField
         id="standard-basic"
         label="Email"
