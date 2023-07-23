@@ -1,10 +1,13 @@
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import GoogleTokenStrategy from "passport-google-id-token";
+
 import UserServices from "../services/users";
 
 import dotenv from "dotenv";
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET as string;
+const clientId = process.env.GOOGLE_CLIENT_ID as string;
 
 export const jwtStrategy = new JwtStrategy(
   {
@@ -19,4 +22,19 @@ export const jwtStrategy = new JwtStrategy(
   }
 );
 
-// token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlYUBnbWFpbC5jb20iLCJfaWQiOiI2NGFiZTFmMjg2Y2Q5NGY4OGM5OTZlM2UiLCJpYXQiOjE2ODkxNTE3ODUsImV4cCI6MTY4OTE1NTM4NX0.CAqJK59b_DG9UhcBLrHVAtEtiL3gjn4QCUJOdEq1p0k
+// google passport
+export const googleStrategy = new GoogleTokenStrategy(
+  {
+    clientID: clientId,
+  },
+  async function (parsedToken: any, googleId: string, done: any) {
+    console.log(parsedToken, "k");
+    const userPayload = {
+      email: parsedToken?.payload?.email,
+      firstName: parsedToken?.payload?.given_name,
+      lastName: parsedToken?.payload?.family_name,
+    };
+    const user = await UserServices.findOrCreate(userPayload);
+    done(null, user);
+  }
+);

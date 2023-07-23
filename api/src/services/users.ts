@@ -27,4 +27,20 @@ const updateUser = async (
   return foundUser;
 };
 
-export default { createUserService, findUserByEmail, updateUser };
+const findOrCreate = async (payload: Partial<UserDocument>) => {
+  const result = await User.findOne({ email: payload.email });
+  if (result) {
+    return result;
+  } else {
+    const user = new User({
+      email: payload.email,
+      firstName: payload.firstName,
+      acceptedTerms: true,
+      logInWith: "google",
+    });
+    const createdUser = await user.save();
+    return createdUser;
+  }
+};
+
+export default { createUserService, findUserByEmail, updateUser, findOrCreate };
