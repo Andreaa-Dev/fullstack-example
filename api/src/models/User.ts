@@ -4,6 +4,7 @@ export type UserDocument = Document & {
   email: string;
   password: string;
   firstName: string;
+  role: string;
 };
 
 const UserSchema = new mongoose.Schema({
@@ -21,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "guest",
+    default: "user",
   },
 });
 

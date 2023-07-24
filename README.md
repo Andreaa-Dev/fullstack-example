@@ -10,3 +10,4 @@ Fullstack example
 ### Notes for Andrea
 
 - database: isa8-demo
+- admin: first admin, admin check middleware, make user as admin
