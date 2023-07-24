@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from "express";
+
 import { ForbiddenError } from "../helpers/apiError";
 import { UserDocument } from "../models/User";
 
@@ -12,4 +13,5 @@ const adminCheck = async (req: Request, res: Response, next: NextFunction) => {
     throw new ForbiddenError();
   }
 };
+
 export default adminCheck;

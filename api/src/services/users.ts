@@ -43,4 +43,43 @@ const findOrCreate = async (payload: Partial<UserDocument>) => {
   }
 };
 
-export default { createUserService, findUserByEmail, updateUser, findOrCreate };
+const banUser = async (userId: string) => {
+  const foundUser = await User.findOne({ _id: userId });
+  if (foundUser) {
+    if (foundUser.isBanned === true) {
+      foundUser.isBanned = false;
+      updateUser(userId, foundUser);
+    } else {
+      foundUser.isBanned = true;
+      updateUser(userId, foundUser);
+    }
+  } else {
+    throw new NotFoundError("User not found");
+  }
+};
+const makeAdmin = async (userId: string) => {
+  const foundUser = await User.findOne({ _id: userId });
+  if (foundUser) {
+    if (foundUser.role === "admin") {
+      foundUser.role = "user";
+    } else {
+      if (foundUser.isBanned === true) {
+        foundUser.role = "user";
+      } else {
+        foundUser.role = "admin";
+      }
+    }
+    updateUser(userId, foundUser);
+  } else {
+    throw new NotFoundError("User not found");
+  }
+};
+
+export default {
+  createUserService,
+  findUserByEmail,
+  updateUser,
+  findOrCreate,
+  banUser,
+  makeAdmin,
+};

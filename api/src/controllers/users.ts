@@ -89,3 +89,23 @@ export const updateUserController = async (
     next(error);
   }
 };
+
+// make admin
+export const makeAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.params.userId;
+    await UserServices.makeAdmin(userId);
+    res.sendStatus(200);
+  } catch (error) {
+    if (error instanceof Error && error.name == "ValidationError") {
+      next(new BadRequestError("Invalid Request", error));
+    } else {
+      next(error);
+    }
+  }
+};
+// bar user

@@ -5,6 +5,7 @@ export type UserDocument = Document & {
   password: string;
   firstName: string;
   role: string;
+  isBanned: boolean;
 };
 
 const UserSchema = new mongoose.Schema({
@@ -23,6 +24,10 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "user",
+  },
+  isBanned: {
+    type: String,
+    default: false,
   },
 });
 
