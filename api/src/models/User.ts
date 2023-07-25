@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: false,
   },
+  // log in with google
 });
 
 export default mongoose.model<UserDocument>("User", UserSchema);
