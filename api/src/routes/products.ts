@@ -9,6 +9,7 @@ import { Router } from "express";
 
 const router = Router();
 
+// where to put admin???
 router.post("/", createProduct);
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
