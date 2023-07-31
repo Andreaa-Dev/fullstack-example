@@ -7,6 +7,7 @@ import {
   updateUserController,
   getAllUsersController,
   makeAdmin,
+  googleAuthenticate,
 } from "../controllers/users";
 import adminCheck from "../middlewares/adminCheck";
 
@@ -46,6 +47,13 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   adminCheck,
   makeAdmin
+);
+
+// google
+router.post(
+  "/google-login",
+  passport.authenticate("google-id-token", { session: false }),
+  googleAuthenticate
 );
 
 export default router;

@@ -11,6 +11,7 @@ import CartList from "./components/cart/CartList";
 import OrderList from "./components/orders/OrderList";
 import NavBar from "./components/nav/NavBar";
 import GoogleLogIn from "./components/google/GoogleLogIn";
+import UserInformationFromGoogle from "./components/google/UserInformationFromGoogle";
 
 function App() {
   return (

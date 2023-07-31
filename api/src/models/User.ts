@@ -4,9 +4,11 @@ export type UserDocument = Document & {
   email: string;
   password: string;
   firstName: string;
+  lastName: string;
   // enum: "user" | "admin"| "subAdmin"
   role: string;
   isBanned: boolean;
+  avatar: string;
 };
 
 const UserSchema = new mongoose.Schema({
@@ -17,9 +19,12 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   firstName: {
+    type: String,
+  },
+  lastName: {
     type: String,
   },
   role: {
@@ -29,6 +34,9 @@ const UserSchema = new mongoose.Schema({
   isBanned: {
     type: String,
     default: false,
+  },
+  avatar: {
+    type: String,
   },
   // log in with google
 });

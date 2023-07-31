@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 
-import User from "../models/User";
+import User, { UserDocument } from "../models/User";
 import UserServices from "../services/users";
 import { BadRequestError } from "../helpers/apiError";
 
@@ -116,7 +116,6 @@ export const makeAdmin = async (
     const userId = req.params.userId;
     // const foundUser = await UserServices.makeAdmin(userId);
     // res.status(200).json(foundUser);
-
     await UserServices.makeAdmin(userId);
     res.sendStatus(200);
   } catch (error) {
@@ -127,4 +126,30 @@ export const makeAdmin = async (
     }
   }
 };
-// bar user
+
+// google
+export const googleAuthenticate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userData = req.user as UserDocument;
+    const token = jwt.sign(
+      {
+        email: userData.email,
+        _id: userData._id,
+      },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    if (!userData) {
+      res.json({ message: "can't find user with this email" });
+      return;
+    } else {
+      res.json({ token, userData });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

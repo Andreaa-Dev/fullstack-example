@@ -33,6 +33,7 @@ export const googleStrategy = new GoogleTokenStrategy(
       email: parsedToken?.payload?.email,
       firstName: parsedToken?.payload?.given_name,
       lastName: parsedToken?.payload?.family_name,
+      avatar: parsedToken?.payload?.picture,
     };
     const user = await UserServices.findOrCreate(userPayload);
     done(null, user);

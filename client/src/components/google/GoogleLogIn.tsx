@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import { GoogleLogin } from "@react-oauth/google";
+import user from "./user.png";
 
+export type UserGoogle = {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+};
 export default function GoogleLogIn() {
+  const [userGoogle, setUserGoogle] = useState<UserGoogle>({
+    _id: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    avatar: user,
+  });
   return (
     <div>
       <h1>GoogleLogIn</h1>
       <GoogleLogin
+        type="icon"
+        size="medium"
         onSuccess={async (credentialResponse) => {
           console.log(credentialResponse);
           const url = "http://localhost:8000/users/google-login";
@@ -15,6 +32,7 @@ export default function GoogleLogIn() {
           let res = await axios.post(url, { id_token: credential });
           if (res.status === 200) {
             console.log(res, "response from BE");
+            setUserGoogle(res.data.userData);
           } else {
             alert("Login false");
           }
@@ -22,6 +40,14 @@ export default function GoogleLogIn() {
         onError={() => {
           console.log("Login Failed");
         }}
+      />
+      <h1> user information from google</h1>
+      <p> first Name:{userGoogle.firstName} </p>
+      <img
+        src={userGoogle.avatar}
+        alt={userGoogle.email}
+        height="50px"
+        width="50px"
       />
     </div>
   );
