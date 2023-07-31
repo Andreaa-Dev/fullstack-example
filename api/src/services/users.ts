@@ -5,6 +5,10 @@ const createUserService = async (user: UserDocument): Promise<UserDocument> => {
   return await user.save();
 };
 
+const getAllUsers = async (): Promise<UserDocument[]> => {
+  return await User.find();
+};
+
 const findUserByEmail = async (userEmail: string): Promise<UserDocument> => {
   const foundUser = await User.findOne({ email: userEmail });
   if (!foundUser) {
@@ -71,12 +75,13 @@ const makeAdmin = async (userId: string) => {
     }
     updateUser(userId, foundUser);
   } else {
-    throw new NotFoundError("User not found");
+    throw new NotFoundError(`User not found with ${userId}`);
   }
 };
 
 export default {
   createUserService,
+  getAllUsers,
   findUserByEmail,
   updateUser,
   findOrCreate,

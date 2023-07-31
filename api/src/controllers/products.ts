@@ -76,6 +76,10 @@ export const updateProductInformation = async (
   next: NextFunction
 ) => {
   try {
+    // if the user is admin
+    // if(User.role === "user"){
+
+    // }
     const productId = req.params.id;
 
     const newInformation = req.body;
@@ -95,6 +99,7 @@ export const deleteProduct = async (
   next: NextFunction
 ) => {
   try {
+    // if()
     const productId = req.params.id;
     await deleteProductByIdService(productId);
     res.status(204).send();

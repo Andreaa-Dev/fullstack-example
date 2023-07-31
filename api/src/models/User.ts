@@ -4,6 +4,7 @@ export type UserDocument = Document & {
   email: string;
   password: string;
   firstName: string;
+  // enum: "user" | "admin"| "subAdmin"
   role: string;
   isBanned: boolean;
 };

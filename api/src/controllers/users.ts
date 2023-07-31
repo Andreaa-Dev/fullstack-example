@@ -13,6 +13,7 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
+    // if req.body.email === "andrea@gmail.com"
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -27,6 +28,19 @@ export const createUser = async (
     // way 2
     // await UserServices.createUserService(userInformation);
     // res.status(200)
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllUsersController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userList = await UserServices.getAllUsers();
+    res.status(200).json(userList);
   } catch (error) {
     next(error);
   }
@@ -81,6 +95,8 @@ export const updateUserController = async (
   next: NextFunction
 ) => {
   try {
+    const userFromPassport = req.user;
+    console.log(userFromPassport, "passport");
     const update = req.body;
     const userId = req.params.id;
     const updatedUser = await UserServices.updateUser(userId, update);
@@ -98,6 +114,9 @@ export const makeAdmin = async (
 ) => {
   try {
     const userId = req.params.userId;
+    // const foundUser = await UserServices.makeAdmin(userId);
+    // res.status(200).json(foundUser);
+
     await UserServices.makeAdmin(userId);
     res.sendStatus(200);
   } catch (error) {

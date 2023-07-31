@@ -5,7 +5,10 @@ import {
   createUser,
   logInWithPassword,
   updateUserController,
+  getAllUsersController,
+  makeAdmin,
 } from "../controllers/users";
+import adminCheck from "../middlewares/adminCheck";
 
 const router = Router();
 
@@ -23,5 +26,26 @@ router.put(
 );
 // user has log in
 // router.get("/:id", getUserById);
+
+// get list of user
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  adminCheck,
+  getAllUsersController
+);
+
+// role: user =>
+// andrea => admin
+// change helen@gmail.com from user => admin
+// which user to change the role
+// helen id
+
+router.put(
+  "/:userId/make-admin",
+  passport.authenticate("jwt", { session: false }),
+  adminCheck,
+  makeAdmin
+);
 
 export default router;

@@ -13,7 +13,7 @@ const router = Router();
 // create order
 router.post(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   createOrderController
 );
 
