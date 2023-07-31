@@ -8,8 +8,9 @@ import AccountRegisterForm from "./components/users/AccountRegisterForm";
 import AccountLogInForm from "./components/users/AccountLogInForm";
 import UserInformation from "./components/users/UserInformation";
 import CartList from "./components/cart/CartList";
-import NavBar from "./nav/NavBar";
 import OrderList from "./components/orders/OrderList";
+import NavBar from "./components/nav/NavBar";
+import GoogleLogIn from "./components/google/GoogleLogIn";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
         <Route path="/cart" element={<CartList />} />
         <Route path="/order" element={<OrderList />} />
+        <Route path="/google-login" element={<GoogleLogIn />} />
       </Routes>
     </div>
   );
