@@ -17,6 +17,7 @@ export const jwtStrategy = new JwtStrategy(
   async (payload, done) => {
     const userEmail = payload.email;
     const foundUser = await UserServices.findUserByEmail(userEmail);
+
     done(null, foundUser);
     // next()
   }
@@ -27,15 +28,17 @@ export const googleStrategy = new GoogleTokenStrategy(
   {
     clientID: clientId,
   },
+  // after the credential send from front end match from Google system
   async function (parsedToken: any, googleId: string, done: any) {
-    console.log(parsedToken, "k");
+    console.log(parsedToken, "token");
     const userPayload = {
       email: parsedToken?.payload?.email,
       firstName: parsedToken?.payload?.given_name,
       lastName: parsedToken?.payload?.family_name,
       avatar: parsedToken?.payload?.picture,
     };
-    const user = await UserServices.findOrCreate(userPayload);
-    done(null, user);
+    const foundUser = await UserServices.findOrCreate(userPayload);
+    // from the database
+    done(null, foundUser);
   }
 );

@@ -14,6 +14,7 @@ const adminCheck = async (req: Request, res: Response, next: NextFunction) => {
   const userRole = userData.role;
 
   console.log(userRole, "user");
+  //  if (userRole === "subUser") {update }
 
   if (userRole === "admin") {
     next();

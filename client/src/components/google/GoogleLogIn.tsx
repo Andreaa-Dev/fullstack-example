@@ -19,14 +19,16 @@ export default function GoogleLogIn() {
     lastName: "",
     avatar: user,
   });
+  // function
   return (
     <div>
       <h1>GoogleLogIn</h1>
       <GoogleLogin
-        type="icon"
+        // type="icon"
         size="medium"
+        shape="rectangular"
         onSuccess={async (credentialResponse) => {
-          console.log(credentialResponse);
+          console.log(credentialResponse, "credential");
           const url = "http://localhost:8000/users/google-login";
           const credential = credentialResponse.credential;
           let res = await axios.post(url, { id_token: credential });
@@ -43,6 +45,7 @@ export default function GoogleLogIn() {
       />
       <h1> user information from google</h1>
       <p> first Name:{userGoogle.firstName} </p>
+      <p> last name: {userGoogle.lastName}</p>
       <img
         src={userGoogle.avatar}
         alt={userGoogle.email}

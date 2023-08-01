@@ -14,6 +14,7 @@ const root = ReactDOM.createRoot(
 );
 
 const clientId = process.env.REACT_APP_CLIENT_ID as string;
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

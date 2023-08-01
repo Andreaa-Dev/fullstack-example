@@ -16,6 +16,8 @@ export const createUser = async (
     // if req.body.email === "andrea@gmail.com"
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    //
+    // console.log(res.user, "request from user");
 
     const userInformation = new User({
       email: req.body.email,
@@ -99,6 +101,7 @@ export const updateUserController = async (
     console.log(userFromPassport, "passport");
     const update = req.body;
     const userId = req.params.id;
+    // if res.body.role
     const updatedUser = await UserServices.updateUser(userId, update);
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -134,9 +137,14 @@ export const googleAuthenticate = async (
   next: NextFunction
 ) => {
   try {
+    // how you can access the value from passport
+    // foundUser
+    console.log(req, "request");
+    // request.body
     const userData = req.user as UserDocument;
     const token = jwt.sign(
       {
+        // first name + last name
         email: userData.email,
         _id: userData._id,
       },

@@ -11,3 +11,7 @@ Fullstack example
 
 - database: isa8-demo
 - admin: first admin, admin check middleware, make user as admin
+
+## Notes
+
+1. console google developer

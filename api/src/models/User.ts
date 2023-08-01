@@ -5,7 +5,7 @@ export type UserDocument = Document & {
   password: string;
   firstName: string;
   lastName: string;
-  // enum: "user" | "admin"| "subAdmin"
+  // enum: "user" | "admin"| "subUser"
   role: string;
   isBanned: boolean;
   avatar: string;
@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+
   // log in with google
 });
 

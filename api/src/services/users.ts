@@ -31,8 +31,11 @@ const updateUser = async (
   return foundUser;
 };
 
-const findOrCreate = async (payload: Partial<UserDocument>) => {
+const findOrCreate = async (
+  payload: Partial<UserDocument>
+): Promise<UserDocument> => {
   const result = await User.findOne({ email: payload.email });
+  // find user by email from database
   if (result) {
     return result;
   } else {

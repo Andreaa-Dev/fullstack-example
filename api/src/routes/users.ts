@@ -20,6 +20,7 @@ router.post("/", createUser);
 router.post("/login", logInWithPassword);
 
 // update user information
+// change role => admin
 router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
@@ -53,6 +54,7 @@ router.put(
 router.post(
   "/google-login",
   passport.authenticate("google-id-token", { session: false }),
+  // user -  from passport
   googleAuthenticate
 );
 
