@@ -98,7 +98,7 @@ export const updateUserController = async (
 ) => {
   try {
     const userFromPassport = req.user;
-    console.log(userFromPassport, "passport");
+    // console.log(userFromPassport, "passport");
     const update = req.body;
     const userId = req.params.id;
     // if res.body.role
@@ -139,7 +139,7 @@ export const googleAuthenticate = async (
   try {
     // how you can access the value from passport
     // foundUser
-    console.log(req, "request");
+    // console.log(req, "request");
     // request.body
     const userData = req.user as UserDocument;
     const token = jwt.sign(

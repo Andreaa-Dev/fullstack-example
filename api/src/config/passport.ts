@@ -30,7 +30,7 @@ export const googleStrategy = new GoogleTokenStrategy(
   },
   // after the credential send from front end match from Google system
   async function (parsedToken: any, googleId: string, done: any) {
-    console.log(parsedToken, "token");
+    // console.log(parsedToken, "token");
     const userPayload = {
       email: parsedToken?.payload?.email,
       firstName: parsedToken?.payload?.given_name,

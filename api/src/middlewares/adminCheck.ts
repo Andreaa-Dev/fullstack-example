@@ -9,11 +9,11 @@ const adminCheck = async (req: Request, res: Response, next: NextFunction) => {
   // req.body
   // req.user
 
-  console.log(req, "request in middleware");
+  // console.log(req, "request in middleware");
   const userData = req.user as UserDocument;
   const userRole = userData.role;
 
-  console.log(userRole, "user");
+  // console.log(userRole, "user");
   //  if (userRole === "subUser") {update }
 
   if (userRole === "admin") {

@@ -1,13 +1,8 @@
+import { ProductDocument } from "./../models/Product";
 import { Request, Response, NextFunction } from "express";
 
 import Product from "../models/Product";
-import {
-  createProductService,
-  getProductList,
-  getProductByIdService,
-  updateProductByIdService,
-  deleteProductByIdService,
-} from "../services/products";
+import ProductServices from "../services/products";
 
 // next function
 export const createProduct = async (
@@ -36,7 +31,9 @@ export const createProduct = async (
   // });
 
   try {
-    const product = await createProductService(productInformation);
+    const product = await ProductServices.createProductService(
+      productInformation
+    );
     res.status(201).json(product);
   } catch (error) {
     next(error);
@@ -49,7 +46,7 @@ export const getAllProducts = async (
   next: NextFunction
 ) => {
   try {
-    const productList = await getProductList();
+    const productList = await ProductServices.getProductList();
     res.status(200).json(productList);
   } catch (error) {
     next(error);
@@ -63,7 +60,7 @@ export const getProductById = async (
 ) => {
   try {
     const productId = req.params.id;
-    const product = await getProductByIdService(productId);
+    const product = await ProductServices.getProductByIdService(productId);
     res.status(200).json(product);
   } catch (error) {
     next(error);
@@ -83,7 +80,7 @@ export const updateProductInformation = async (
     const productId = req.params.id;
 
     const newInformation = req.body;
-    const newProduct = await updateProductByIdService(
+    const newProduct = await ProductServices.updateProductByIdService(
       productId,
       newInformation
     );
@@ -101,7 +98,7 @@ export const deleteProduct = async (
   try {
     // if()
     const productId = req.params.id;
-    await deleteProductByIdService(productId);
+    await ProductServices.deleteProductByIdService(productId);
     res.status(204).send();
   } catch (error) {
     next(error);

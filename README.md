@@ -15,3 +15,8 @@ Fullstack example
 ## Notes
 
 1. console google developer
+
+## test
+
+1. services: unit test
+2. controller: e2e

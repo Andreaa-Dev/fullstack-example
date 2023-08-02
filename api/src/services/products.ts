@@ -1,17 +1,17 @@
 import { NotFoundError } from "./../helpers/apiError";
 import Product, { ProductDocument } from "../models/Product";
 
-export const createProductService = async (
+const createProductService = async (
   product: ProductDocument
 ): Promise<ProductDocument> => {
   return await product.save();
 };
 
-export const getProductList = async (): Promise<ProductDocument[]> => {
+const getProductList = async (): Promise<ProductDocument[]> => {
   return await Product.find();
 };
 
-export const getProductByIdService = async (
+const getProductByIdService = async (
   productId: string
 ): Promise<ProductDocument> => {
   const foundProduct = await Product.findById(productId);
@@ -21,7 +21,7 @@ export const getProductByIdService = async (
   return foundProduct;
 };
 
-export const updateProductByIdService = async (
+const updateProductByIdService = async (
   productId: string,
   newInformation: Partial<ProductDocument>
 ): Promise<ProductDocument> => {
@@ -36,7 +36,7 @@ export const updateProductByIdService = async (
   return foundProduct;
 };
 
-export const deleteProductByIdService = async (
+const deleteProductByIdService = async (
   productId: string
 ): Promise<ProductDocument> => {
   const foundProduct = await Product.findByIdAndDelete(productId);
@@ -44,4 +44,12 @@ export const deleteProductByIdService = async (
     throw new NotFoundError(`product ${productId} not found`);
   }
   return foundProduct;
+};
+
+export default {
+  createProductService,
+  getProductList,
+  getProductByIdService,
+  updateProductByIdService,
+  deleteProductByIdService,
 };
