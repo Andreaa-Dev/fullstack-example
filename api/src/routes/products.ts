@@ -15,7 +15,7 @@ const router = Router();
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  // adminCheck,
+  adminCheck,
   createProduct
 );
 

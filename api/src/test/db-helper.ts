@@ -1,11 +1,13 @@
 import mongoose, { ConnectOptions } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
+// fake database
 const connect = async () => {
   const mongod = await MongoMemoryServer.create();
   const uri = mongod.getUri();
 
   await mongoose.connect(uri, {
+    // db-name
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } as ConnectOptions);

@@ -35,6 +35,7 @@ describe("product service", () => {
       price: 1,
       image: "test.png",
     });
+    // check createProductService => talk to fake database =>  integration test
     const product = await ProductService.createProductService(productData);
 
     expect(product).toHaveProperty("_id");
@@ -42,9 +43,12 @@ describe("product service", () => {
     expect(product).toHaveProperty("price", 1);
   });
 
+  // fake database
   it("should get a product with id", async () => {
     const product = await createProduct();
+    // fake database :test1
     const found = await ProductService.getProductByIdService(product._id);
+    // found: {_id, title: "test"}
     expect(found.title).toEqual(product.title);
     expect(found._id).toEqual(product._id);
   });

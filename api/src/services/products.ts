@@ -1,6 +1,8 @@
 import { NotFoundError } from "./../helpers/apiError";
 import Product, { ProductDocument } from "../models/Product";
 
+// title: test, price: 1 => _id
+// fake database
 const createProductService = async (
   product: ProductDocument
 ): Promise<ProductDocument> => {

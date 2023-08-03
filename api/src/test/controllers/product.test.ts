@@ -56,6 +56,8 @@ describe("product controller", () => {
     await mongodHelper.closeDatabase();
   });
 
+  // create product <= log in <= register , admin
+
   //small test
   it("should create a product", async () => {
     // user log in
@@ -79,7 +81,13 @@ describe("product controller", () => {
       role: "admin",
     });
 
+    // create product => delete
     let response = await createProduct(token);
+    // fake database:
+    // _id
+    // title: "test",
+    // price: 123,
+    // image: "test.png",
     expect(response.status).toBe(201);
     const productId = response.body._id;
 
@@ -88,5 +96,6 @@ describe("product controller", () => {
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.status).toEqual(204);
+    // expect(res.body).toHaveProperty("_id");
   });
 });
