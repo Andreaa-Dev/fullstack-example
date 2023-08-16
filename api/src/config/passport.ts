@@ -24,21 +24,21 @@ export const jwtStrategy = new JwtStrategy(
 );
 
 // google passport
-export const googleStrategy = new GoogleTokenStrategy(
-  {
-    clientID: clientId,
-  },
-  // after the credential send from front end match from Google system
-  async function (parsedToken: any, googleId: string, done: any) {
-    // console.log(parsedToken, "token");
-    const userPayload = {
-      email: parsedToken?.payload?.email,
-      firstName: parsedToken?.payload?.given_name,
-      lastName: parsedToken?.payload?.family_name,
-      avatar: parsedToken?.payload?.picture,
-    };
-    const foundUser = await UserServices.findOrCreate(userPayload);
-    // from the database
-    done(null, foundUser);
-  }
-);
+// export const googleStrategy = new GoogleTokenStrategy(
+//   {
+//     clientID: clientId,
+//   },
+//   // after the credential send from front end match from Google system
+//   async function (parsedToken: any, googleId: string, done: any) {
+//     // console.log(parsedToken, "token");
+//     const userPayload = {
+//       email: parsedToken?.payload?.email,
+//       firstName: parsedToken?.payload?.given_name,
+//       lastName: parsedToken?.payload?.family_name,
+//       avatar: parsedToken?.payload?.picture,
+//     };
+//     const foundUser = await UserServices.findOrCreate(userPayload);
+//     // from the database
+//     done(null, foundUser);
+//   }
+// );

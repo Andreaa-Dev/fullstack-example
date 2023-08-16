@@ -23,6 +23,8 @@ app.use("/users", userRouter);
 app.use("/orders", orderRouter);
 
 // Serve product images from the 'images' folder
+// host image in cloud
+
 // console.log(__dirname);
 // app.use(
 //   "/static",

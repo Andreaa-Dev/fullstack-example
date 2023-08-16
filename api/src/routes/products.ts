@@ -14,8 +14,8 @@ const router = Router();
 // where to put admin???
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
-  adminCheck,
+  // passport.authenticate("jwt", { session: false }),
+  // adminCheck,
   createProduct
 );
 
@@ -25,16 +25,16 @@ router.get("/:id", getProductById);
 // admin
 router.put(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   // found user
-  adminCheck,
+  // adminCheck,
   updateProductInformation
 );
 
 router.delete(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
-  adminCheck,
+  // passport.authenticate("jwt", { session: false }),
+  // adminCheck,
   // found user
   deleteProduct
 );

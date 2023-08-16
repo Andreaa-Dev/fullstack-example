@@ -77,6 +77,7 @@ export const logInWithPassword = async (
       {
         // never use password
         // user information: firstName, lastName
+        // 3 parts
         email: userData.email,
         _id: userData._id,
       },
