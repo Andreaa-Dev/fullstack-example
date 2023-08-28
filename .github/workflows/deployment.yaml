@@ -40,5 +40,8 @@ jobs:
               git pull origin main &&
               cd /home/ubuntu/app/fullstack-example/api &&
               yarn install &&
-              yarn start
+              yarn run build &&
+              cp .env ./dist &&
+              sudo pm2 stop ./dist/server.js &&
+              sudo pm2 start ./dist/server.js
               '
