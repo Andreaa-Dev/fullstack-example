@@ -1,0 +1,48 @@
+name: fullstack-ci-cd
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        working-directory: ./api
+        run: yarn install --frozen-lockfile
+
+      - name: Integration test
+        working-directory: ./api
+        run: yarn test
+
+      - name: Build
+        working-directory: ./api
+        run: yarn run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      - name: Zip Application Code
+        working-directory: ./api
+        run: zip -r deployment.zip ./dist
+
+      - name: Trigger deployment on Codedeploy
+        run: |
+          aws deploy create-deployment \
+            --application-name isa8 \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name isa8-deployment-group	\
+            --s3-location bucket=isa8-codedeploy-deployment,key=deployment.zip,bundleType=zip

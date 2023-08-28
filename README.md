@@ -31,3 +31,13 @@ Step 2:
 2. controller: e2e
 
 ## CI-CD
+
+code deploy: https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html
+
+actions: https://github.com/marketplace?type=actions
+
+yaml
+
+- checkout: pull code from repo => VM
+- cache: improve performance
+  cache dependencies - first time then next time no need to install those dep
