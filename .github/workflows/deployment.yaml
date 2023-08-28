@@ -28,21 +28,16 @@ jobs:
         working-directory: ./api
         run: yarn run build
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
-
-      - name: Zip Application Code
-        working-directory: ./api
-        run: zip -r deployment.zip ./dist
-
-      - name: Trigger deployment on Codedeploy
+      - name: Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{secrets.SSH_HOST}}
+          USER_NAME: ${{secrets.USER_NAME}}
         run: |
-          aws deploy create-deployment \
-            --application-name isa8 \
-            --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --deployment-group-name isa8-deployment-group	\
-            --s3-location bucket=isa8-codedeploy-deployment,key=deployment.zip,bundleType=zip
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          cd /home/ubuntu/app/fullstack-example
+          git pull origin main
+          cd /home/ubuntu/app/fullstack-example/api
+          yarn install
+          yarn start
