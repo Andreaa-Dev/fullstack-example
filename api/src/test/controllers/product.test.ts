@@ -14,7 +14,7 @@ async function createProduct(token: string) {
     image: "test.png",
   };
   return await request(app)
-    .post("/products")
+    .post("/product")
     .set("Authorization", `Bearer ${token}`)
     .send(product);
 }
