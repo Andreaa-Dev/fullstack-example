@@ -42,6 +42,6 @@ jobs:
               yarn install &&
               yarn run build &&
               cp .env ./dist &&
-              sudo pm2 stop ./dist/server.js &&
+              sudo pm2 stop ./dist/server.js || true &&
               sudo pm2 start ./dist/server.js
               '
