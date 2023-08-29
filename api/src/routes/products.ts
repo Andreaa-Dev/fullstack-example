@@ -14,7 +14,7 @@ const router = Router();
 // where to put admin???
 router.post(
   "/",
-  // passport.Fauthenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   // adminCheck,
   createProduct
 );
