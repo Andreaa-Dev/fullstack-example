@@ -6,14 +6,11 @@ import app from "./app";
 
 dotenv.config();
 
-// 8000, 5000, 4000
-// port free
 const port = 8000;
 
 mongoose
   .connect(process.env.MONGODB_URI as string)
   .then(() => {
-    // run the server here
     app.listen(port, () => {
       console.log(`server is running at port ${port}`);
     });

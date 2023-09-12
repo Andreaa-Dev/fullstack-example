@@ -38,8 +38,6 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
-
-  // log in with google
 });
 
 export default mongoose.model<UserDocument>("User", UserSchema);

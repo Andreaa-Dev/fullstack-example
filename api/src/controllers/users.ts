@@ -13,23 +13,15 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    // if req.body.email === "andrea@gmail.com"
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    //
-    // console.log(res.user, "request from user");
 
     const userInformation = new User({
       email: req.body.email,
       password: hashedPassword,
     });
-    // way 1
     const newUser = await UserServices.createUserService(userInformation);
     res.status(200).json(newUser);
-
-    // way 2
-    // await UserServices.createUserService(userInformation);
-    // res.status(200)
   } catch (error) {
     next(error);
   }
@@ -57,27 +49,17 @@ export const logInWithPassword = async (
   next: NextFunction
 ) => {
   try {
-    // logic
-    // find user by email
     const userData = await UserServices.findUserByEmail(req.body.email);
     if (!userData) {
       res.status(403).json({ message: "user do not have account yet" });
       return;
     }
-    // token
-    // sign : 3
-    // 1.payload
-    // 2. JWT
-    // 3. expire time: 1h, 1m, 1s
     const match = await bcrypt.compare(userData.password, req.body.password);
     if (match) {
       throw new BadRequestError("Password does not match  !");
     }
     const token = jwt.sign(
       {
-        // never use password
-        // user information: firstName, lastName
-        // 3 parts
         email: userData.email,
         _id: userData._id,
       },
@@ -98,11 +80,8 @@ export const updateUserController = async (
   next: NextFunction
 ) => {
   try {
-    const userFromPassport = req.user;
-    // console.log(userFromPassport, "passport");
     const update = req.body;
     const userId = req.params.id;
-    // if res.body.role
     const updatedUser = await UserServices.updateUser(userId, update);
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -118,8 +97,6 @@ export const makeAdmin = async (
 ) => {
   try {
     const userId = req.params.userId;
-    // const foundUser = await UserServices.makeAdmin(userId);
-    // res.status(200).json(foundUser);
     await UserServices.makeAdmin(userId);
     res.sendStatus(200);
   } catch (error) {
@@ -138,10 +115,6 @@ export const googleAuthenticate = async (
   next: NextFunction
 ) => {
   try {
-    // how you can access the value from passport
-    // foundUser
-    // console.log(req, "request");
-    // request.body
     const userData = req.user as UserDocument;
     const token = jwt.sign(
       {

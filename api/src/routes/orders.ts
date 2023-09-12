@@ -8,19 +8,15 @@ import {
 
 const router = Router();
 
-// admin here???
-
-// create order
 router.post(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   createOrderController
 );
 
-// get orderList by user id
 router.get(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   getOrderListByUserId
 );
 

@@ -11,31 +11,27 @@ import passport from "passport";
 
 const router = Router();
 
-// where to put admin???
 router.post(
   "/",
-  // passport.authenticate("jwt", { session: false }),
-  // adminCheck,
+  passport.authenticate("jwt", { session: false }),
+  adminCheck,
   createProduct
 );
 
 router.get("/", getAllProducts);
-router.get("/:id", getProductById);
+router.get("/:productId", getProductById);
 
-// admin
 router.put(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
-  // found user
-  // adminCheck,
+  passport.authenticate("jwt", { session: false }),
+  adminCheck,
   updateProductInformation
 );
 
 router.delete(
   "/:id",
-  // passport.authenticate("jwt", { session: false }),
-  // adminCheck,
-  // found user
+  passport.authenticate("jwt", { session: false }),
+  adminCheck,
   deleteProduct
 );
 

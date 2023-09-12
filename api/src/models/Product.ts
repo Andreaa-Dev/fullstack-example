@@ -1,6 +1,5 @@
 import mongoose, { Document } from "mongoose";
 
-// type from typescript
 export type ProductDocument = Document & {
   title: string;
   price: number;
@@ -9,7 +8,6 @@ export type ProductDocument = Document & {
 
 export const ProductSchema = new mongoose.Schema({
   title: {
-    // type from database
     type: String,
     required: true,
     unique: true,

@@ -8,6 +8,7 @@ export default function ProductList() {
   const productList = useSelector(
     (state: RootState) => state.products.products
   );
+  console.log(productList, "products");
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -17,7 +18,7 @@ export default function ProductList() {
 
   return (
     <div>
-      <h1>ProductList</h1>
+      <h1 className="productTitle">Product List</h1>
       {productList.map((product) => {
         return (
           <div key={product._id}>

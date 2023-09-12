@@ -59,7 +59,7 @@ export const getProductById = async (
   next: NextFunction
 ) => {
   try {
-    const productId = req.params.id;
+    const productId = req.params.productId;
     const product = await ProductServices.getProductByIdService(productId);
     res.status(200).json(product);
   } catch (error) {
@@ -73,12 +73,7 @@ export const updateProductInformation = async (
   next: NextFunction
 ) => {
   try {
-    // if the user is admin
-    // if(User.role === "user"){
-
-    // }
     const productId = req.params.id;
-
     const newInformation = req.body;
     const newProduct = await ProductServices.updateProductByIdService(
       productId,

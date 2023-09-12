@@ -43,3 +43,12 @@ yaml
   cache dependencies - first time then next time no need to install those dep
 
   16.171.18.64
+
+// embed
+// embed product =>
+// populate => find product => join data from product to order => slow
+// 1 order : 2 products
+// 3 queries:
+// 1: get order
+// 2: get product detail 1
+// 3: get product detail 2
